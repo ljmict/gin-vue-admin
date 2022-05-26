@@ -29,6 +29,24 @@
         </el-card>
       </el-col>
     </el-row>
+    <el-menu :style="{'z-index': 9999, position: 'fixed',left: rightMenu.optionCardX + 'px', 
+				top: rightMenu.optionCardY + 'px', width: '100px', background: 'white',
+				 'box-shadow': '0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)'}" 
+				 v-show="rightMenu.optionCardShow" id="option-button-group">
+      <el-menu-item index="4">
+        <el-icon><setting /></el-icon>
+        <span>新建</span>
+      </el-menu-item>
+      <el-menu-item index="4">
+        <el-icon><setting /></el-icon>
+        <span>添加</span>
+      </el-menu-item>
+      <el-divider />
+      <el-menu-item index="4">
+        <el-icon><setting /></el-icon>
+        <span>删除</span>
+      </el-menu-item>
+    </el-menu>
   </div>
 </template>
 
@@ -36,6 +54,16 @@
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import type { DragEvents } from 'element-plus/es/components/tree/src/model/useDragNode'
 import type { DropType } from 'element-plus/es/components/tree/src/tree.type'
+import { reactive } from 'vue'
+
+const rightMenu = reactive({
+  optionCardX: '', //文件夹节点操作卡位置
+  optionCardY: 0,
+  optionCardShow: false,  //文件夹操作卡是否显示
+  optionData: [], //右键选中的节点的data
+  node: null, //当前右键选中的节点信息
+  tree: null,
+})
 
 const handleDragStart = (node: Node, ev: DragEvents) => {
   console.log('drag start', node)
@@ -142,7 +170,27 @@ const data = [
   },
 ]
 
-const handleRightClick = () => {
-
+const handleRightClick = (e, data, n, t) => {
+	rightMenu.optionCardX = e.x   // 让右键菜单出现在鼠标右键的位置
+	rightMenu.optionCardY = e.y - 110
+	rightMenu.optionData = data
+	rightMenu.node = n // 将当前节点保存
+	rightMenu.tree = t
+	rightMenu.optionCardShow = true  // 展示右键菜单
 }
 </script>
+
+<style lang="scss" scoped>
+// 文件夹卡片
+.folder-box {
+	height: 100%;
+}
+
+// 右键菜单按钮
+.option-card-button {
+	width: 100%;
+	margin-left: 0;
+	font-size: 10px;
+	border-radius: 0;
+}
+</style>
