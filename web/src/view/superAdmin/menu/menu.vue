@@ -26,9 +26,15 @@
         <el-table-column align="left" label="图标" min-width="140" prop="authorityName">
           <template #default="scope">
             <div v-if="scope.row.meta.icon" class="icon-column">
-              <el-icon>
-                <component :is="scope.row.meta.icon" />
-              </el-icon>
+              <template v-if="scope.row.meta.icon.includes('gvaIcon-')">
+                <el-icon class="gva-icon gvaIcon" :class="scope.row.meta.icon">
+                </el-icon>
+              </template>
+              <template v-else>
+                <el-icon>
+                  <component :is="scope.row.meta.icon" />
+                </el-icon>
+              </template>
               <span>{{ scope.row.meta.icon }}</span>
             </div>
           </template>

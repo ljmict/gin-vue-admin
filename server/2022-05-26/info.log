@@ -1,0 +1,6 @@
+2022/05/26 - 14:07:42.206	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:32	use middleware logger
+2022/05/26 - 14:07:42.207	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:36	use middleware cors
+2022/05/26 - 14:08:09.642	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:32	use middleware logger
+2022/05/26 - 14:08:09.642	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:36	use middleware cors
+2022/05/26 - 14:38:05.400	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:32	use middleware logger
+2022/05/26 - 14:38:05.400	info	/home/Michael/GolandProjects/gin-vue-admin/server/initialize/router.go:36	use middleware cors

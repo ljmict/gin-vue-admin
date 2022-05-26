@@ -1,10 +1,18 @@
 <template>
   <div>
-    <span class="gva-icon" style="position: absolute; z-index: 9999; padding: 3px 10px 0; ">
-      <el-icon>
-        <component :is="metaData.icon"/>
-      </el-icon>
-    </span>
+    <template v-if="metaData.icon.includes('gvaIcon-')">
+      <span class="gva-icon" style="position: absolute; z-index: 9999; padding: 2px 10px 0; ">
+        <el-icon class="gvaIcon" :class="metaData.icon" style="font-size: 13px; ">
+        </el-icon>
+      </span>
+    </template>
+    <template v-else>
+      <span class="gva-icon" style="position: absolute; z-index: 9999; padding: 3px 10px 0; ">
+        <el-icon>
+          <component :is="metaData.icon"/>
+        </el-icon>
+      </span>
+    </template>
     <el-select v-model="metaData.icon" style="width:100%" clearable filterable class="gva-select" placeholder="请选择">
       <el-option
           v-for="item in options"
@@ -12,13 +20,18 @@
           class="select__option_item"
           :label="item.key"
           :value="item.key"
-          6666
       >
+      <template v-if="item.label.includes('gvaIcon-')">
+        <el-icon class="gva-icon gvaIcon" :class="item.label">
+        </el-icon>
+      </template>
+      <template v-else>
         <span class="gva-icon" style=" padding: 3px 0 0; " :class="item.label">
           <el-icon>
             <component :is="item.label"/>
           </el-icon>
         </span>
+      </template>
         <span style="text-align: left">{{ item.key }}</span>
       </el-option>
     </el-select>
@@ -38,6 +51,14 @@ const props = defineProps({
 })
 
 const options = reactive([
+  {
+    'key': 'gvaIcon-kubernetes',
+    'label': 'gvaIcon-kubernetes',
+  },
+  {
+    'key': 'gvaIcon-host',
+    'label': 'gvaIcon-host',
+  },
   {
     'key': 'aim',
     'label': 'aim',

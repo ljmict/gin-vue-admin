@@ -1,8 +1,14 @@
 <template>
   <el-menu-item :index="routerInfo.name">
-    <el-icon v-if="routerInfo.meta.icon">
-      <component :is="routerInfo.meta.icon" />
-    </el-icon>
+    <template v-if="routerInfo.meta.icon.includes('gvaIcon-')">
+      <el-icon class="gvaIcon" :class="routerInfo.meta.icon">
+      </el-icon>
+    </template>
+    <template v-else>
+      <el-icon v-if="routerInfo.meta.icon">
+        <component :is="routerInfo.meta.icon" />
+      </el-icon>
+    </template>
     <template #title>
       <span class="gva-menu-item-title">{{ routerInfo.meta.title }}</span>
     </template>
