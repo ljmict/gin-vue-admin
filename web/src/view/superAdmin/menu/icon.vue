@@ -12,6 +12,7 @@
           class="select__option_item"
           :label="item.key"
           :value="item.key"
+          6666
       >
         <span class="gva-icon" style=" padding: 3px 0 0; " :class="item.label">
           <el-icon>
