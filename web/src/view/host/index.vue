@@ -29,45 +29,12 @@
         </el-card>
       </el-col>
     </el-row>
-    <el-menu :collapse-transition="false" class="rightMenu" :style="{'z-index': 9999, position: 'fixed',left: rightMenu.optionCardX + 'px', 
-				top: rightMenu.optionCardY + 'px', width: '114px', height: '250px', background: 'white',
-				 'box-shadow': '0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)'}" 
-				 v-show="rightMenu.optionCardShow" id="option-button-group">
-      <el-menu-item index="0" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>新建根分组</span>
-      </el-menu-item>
-      <el-menu-item index="1" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>新建子分组</span>
-      </el-menu-item>
-      <el-menu-item index="2" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>重命名</span>
-      </el-menu-item>
-      <el-divider />
-      <el-menu-item index="3" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>添加至分组</span>
-      </el-menu-item>
-      <el-menu-item index="4" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>移动至分组</span>
-      </el-menu-item>
-      <el-divider />
-      <el-menu-item index="5" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>删除主机</span>
-      </el-menu-item>
-      <el-menu-item index="6" style="padding-left: 12px;">
-        <el-icon><setting /></el-icon>
-        <span>删除此分组</span>
-      </el-menu-item>
-    </el-menu>
+    <RightMenu />
   </div>
 </template>
 
 <script lang="ts" setup>
+import RightMenu from '@/view/host/rightMenu/rightMenu.vue'
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import type { DragEvents } from 'element-plus/es/components/tree/src/model/useDragNode'
 import type { DropType } from 'element-plus/es/components/tree/src/tree.type'
@@ -198,42 +165,5 @@ const handleRightClick = (e, data, n, t) => {
 </script>
 
 <style lang="scss" scoped>
-.rightMenu {
-  .el-divider {
-    margin: 4px 0;
-    width: 114px;
-    border: 0;
-    height: 1px;
-    background-color: #f0f0f0;
-  }
 
-  .el-menu-item {
-    padding: 5px 12px;
-    width: 114px;
-    height: 32px;
-    line-height: 22px;
-    
-    .el-icon {
-      width: 12px;
-      font-size: 12px;
-      margin-right: 8px;
-    }
-    span {
-      width: 70px;
-    }
-  }
-}
-
-// 文件夹卡片
-.folder-box {
-	height: 100%;
-}
-
-// 右键菜单按钮
-.option-card-button {
-	width: 100%;
-	margin-left: 0;
-	font-size: 10px;
-	border-radius: 0;
-}
 </style>
