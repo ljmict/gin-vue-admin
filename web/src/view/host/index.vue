@@ -6,7 +6,7 @@
           <template #header>
             <div>分组列表</div>
           </template>
-           <el-tree
+          <el-tree
             :allow-drop="allowDrop"
             :allow-drag="allowDrag"
             :data="data"
@@ -29,25 +29,34 @@
         </el-card>
       </el-col>
     </el-row>
-    <RightMenu />
+    <RightMenu :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
   </div>
 </template>
 
 <script lang="ts" setup>
+import { reactive, ref } from 'vue'
 import RightMenu from '@/view/host/rightMenu/rightMenu.vue'
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import type { DragEvents } from 'element-plus/es/components/tree/src/model/useDragNode'
 import type { DropType } from 'element-plus/es/components/tree/src/tree.type'
-import { reactive } from 'vue'
 
 const rightMenu = reactive({
-  optionCardX: '', //文件夹节点操作卡位置
+  optionCardX: 0, // 文件夹节点操作卡位置
   optionCardY: 0,
-  optionCardShow: false,  //文件夹操作卡是否显示
-  optionData: [], //右键选中的节点的data
-  node: null, //当前右键选中的节点信息
+  optionCardShow: ref(false), // 文件夹操作卡是否显示
+  optionData: [], // 右键选中的节点的data
+  node: null, // 当前右键选中的节点信息
   tree: null,
 })
+
+const handleRightClick = (e, data, n, t) => {
+  rightMenu.optionCardX = e.x // 让右键菜单出现在鼠标右键的位置
+  rightMenu.optionCardY = e.y - 110
+  rightMenu.optionData = data
+  rightMenu.node = n // 将当前节点保存
+  rightMenu.tree = t
+  rightMenu.optionCardShow = true // 展示右键菜单
+}
 
 const handleDragStart = (node: Node, ev: DragEvents) => {
   console.log('drag start', node)
@@ -153,15 +162,6 @@ const data = [
     ],
   },
 ]
-
-const handleRightClick = (e, data, n, t) => {
-	rightMenu.optionCardX = e.x   // 让右键菜单出现在鼠标右键的位置
-	rightMenu.optionCardY = e.y - 110
-	rightMenu.optionData = data
-	rightMenu.node = n // 将当前节点保存
-	rightMenu.tree = t
-	rightMenu.optionCardShow = true  // 展示右键菜单
-}
 </script>
 
 <style lang="scss" scoped>
