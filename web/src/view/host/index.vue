@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div @click="OptionCardClose">
     <el-row :gutter="10">
       <el-col :span="12">
         <el-card>
@@ -29,7 +29,7 @@
         </el-card>
       </el-col>
     </el-row>
-    <RightMenu :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
+    <RightMenu id="option-button-group" v-show="rightMenu.optionCardShow" :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
   </div>
 </template>
 
@@ -56,6 +56,15 @@ const handleRightClick = (e, data, n, t) => {
   rightMenu.node = n // 将当前节点保存
   rightMenu.tree = t
   rightMenu.optionCardShow = true // 展示右键菜单
+}
+
+const OptionCardClose = (event) => {
+  const currentCli = document.getElementById('option-button-group')
+  if (currentCli) {
+    if (!currentCli.contains(event.target)) { // 点击到了id为option-button-group以外的区域，就隐藏菜单
+      rightMenu.optionCardShow = false
+    }
+  }
 }
 
 const handleDragStart = (node: Node, ev: DragEvents) => {

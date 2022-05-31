@@ -1,7 +1,6 @@
 <template>
   <div>
     <el-menu
-      id="option-button-group"
       :collapse-transition="false"
       class="rightMenu"
       :style="{
@@ -14,7 +13,6 @@
         background: 'white',
         'box-shadow': '0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)',
       }"
-      :v-show="false"
     >
       <el-menu-item index="0" style="padding-left: 12px">
         <el-icon class="gvaIcon gvaIcon-wenjianjia" />
