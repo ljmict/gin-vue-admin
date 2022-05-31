@@ -1,7 +1,7 @@
 <template>
   <div @click="OptionCardClose">
     <el-row :gutter="10">
-      <el-col :span="12">
+      <el-col :span="6">
         <el-card>
           <template #header>
             <div>分组列表</div>
@@ -23,9 +23,9 @@
           />
         </el-card>
       </el-col>
-      <el-col :span="12">
+      <el-col :span="18">
         <el-card>
-          kkkkkkkkkkk
+          <TableCard />
         </el-card>
       </el-col>
     </el-row>
@@ -36,6 +36,7 @@
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
 import RightMenu from '@/view/host/rightMenu/rightMenu.vue'
+import TableCard from '@/view/host/tableCard/tableCard.vue'
 import type Node from 'element-plus/es/components/tree/src/model/node'
 import type { DragEvents } from 'element-plus/es/components/tree/src/model/useDragNode'
 import type { DropType } from 'element-plus/es/components/tree/src/tree.type'
