@@ -117,7 +117,7 @@ const allowDrag = (draggingNode: Node) => {
 
 const data = [
   {
-    label: 'Level one 1',
+    label: '阿里云',
     children: [
       {
         label: 'Level two 1-1',
@@ -130,7 +130,7 @@ const data = [
     ],
   },
   {
-    label: 'Level one 2',
+    label: '腾讯云',
     children: [
       {
         label: 'Level two 2-1',
@@ -151,7 +151,7 @@ const data = [
     ],
   },
   {
-    label: 'Level one 3',
+    label: '百度云',
     children: [
       {
         label: 'Level two 3-1',
