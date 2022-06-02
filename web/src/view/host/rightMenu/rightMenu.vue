@@ -63,10 +63,6 @@ const props = defineProps({
   top: {
     type: Number,
     default: 0
-  },
-  showRightMenu: {
-    type: Boolean,
-    default: false
   }
 })
 </script>
@@ -95,6 +91,10 @@ const props = defineProps({
       width: 70px;
     }
   }
+
+  .el-menu-item:hover {
+    background-color: #f0f0f0;
+  }
 }
 
 .danger {
@@ -102,15 +102,8 @@ const props = defineProps({
 }
 
 .danger:hover {
-  color: #fff;
-  background-color: #ff4d4f;
+  color: #fff !important;
+  background-color: #ff4d4f !important;
 }
 
-// 右键菜单按钮
-.option-card-button {
-  width: 100%;
-  margin-left: 0;
-  font-size: 10px;
-  border-radius: 0;
-}
 </style>
