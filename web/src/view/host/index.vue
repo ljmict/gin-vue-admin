@@ -13,6 +13,7 @@
             node-key="id"
             @node-contextmenu="handleRightClick"
           />
+          <RightMenu id="option-button-group" v-show="rightMenu.optionCardShow" :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
         </el-card>
       </el-col>
       <el-col :span="18">
@@ -21,7 +22,6 @@
         </el-card>
       </el-col>
     </el-row>
-    <RightMenu id="option-button-group" v-show="rightMenu.optionCardShow" :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
   </div>
 </template>
 
