@@ -13,7 +13,7 @@
             node-key="id"
             @node-contextmenu="handleRightClick"
           />
-          <RightMenu id="option-button-group" v-show="rightMenu.optionCardShow" :left="rightMenu.optionCardX" :top="rightMenu.optionCardY" />
+          <RightMenu id="option-button-group" :rightMenu="rightMenu" />
         </el-card>
       </el-col>
       <el-col :span="18">
@@ -115,3 +115,14 @@ const data = [
   },
 ]
 </script>
+
+<style>
+.custom-tree-node {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+  padding-right: 8px;
+}
+</style>

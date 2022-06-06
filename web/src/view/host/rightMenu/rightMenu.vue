@@ -1,20 +1,21 @@
 <template>
   <div>
     <el-menu
+      v-show="rightMenu.optionCardShow"
       :collapse-transition="false"
       class="rightMenu"
       :style="{
         'z-index': 9999,
         position: 'fixed',
-        left: left + 'px',
-        top: top + 'px',
+        left: rightMenu.optionCardX + 'px',
+        top: rightMenu.optionCardY + 'px',
         width: '114px',
         height: '250px',
         background: 'white',
         'box-shadow': '0 2px 4px rgba(0, 0, 0, .12), 0 0 6px rgba(0, 0, 0, .04)',
       }"
     >
-      <el-menu-item index="0" style="padding-left: 12px">
+      <el-menu-item index="0" style="padding-left: 12px" @click="newRootGroup(rightMenu.node)">
         <el-icon class="gvaIcon gvaIcon-wenjianjia" />
         <span>新建根分组</span>
       </el-menu-item>
@@ -55,16 +56,40 @@ export default {
 </script>
 
 <script setup>
+import { ElMessage, ElMessageBox } from 'element-plus'
+
 const props = defineProps({
-  left: {
-    type: Number,
-    default: 0
-  },
-  top: {
-    type: Number,
-    default: 0
+  rightMenu: {
+    type: Object,
+    default: null
   }
 })
+
+const newRootGroup = (node) => {
+  props.rightMenu.optionCardShow = false
+
+  ElMessageBox.prompt('请输入根分组名称', '提示', {
+    confirmButtonText: '确定',
+    cancelButtonText: '取消',
+    inputPattern: /^\S{1,10}$/,
+    inputErrorMessage: '长度在1－10之间',
+  })
+    .then(({ value }) => {
+      ElMessage({
+        type: 'success',
+        message: `根分组创建成功：${value}`,
+      })
+
+      
+    })
+    .catch(() => {
+      ElMessage({
+        type: 'info',
+        message: '取消输入',
+      })
+    })
+}
+
 </script>
 
 <style lang="scss" scoped>
