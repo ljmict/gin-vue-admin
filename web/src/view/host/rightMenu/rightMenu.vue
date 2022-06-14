@@ -79,8 +79,6 @@ const newRootGroup = (node) => {
         type: 'success',
         message: `根分组创建成功：${value}`,
       })
-
-      
     })
     .catch(() => {
       ElMessage({
