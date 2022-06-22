@@ -35,7 +35,12 @@ func (b *BaseApi) Login(c *gin.Context) {
 			global.GVA_LOG.Error("登陆失败! 用户名不存在或者密码错误!", zap.Error(err))
 			response.FailWithMessage("用户名不存在或者密码错误", c)
 		} else {
-			b.tokenNext(c, *user)
+			if user.Enable != 1 {
+				global.GVA_LOG.Error("登陆失败! 用户被禁止登录!")
+				response.FailWithMessage("用户被禁止登录", c)
+				return
+			}
+			b.TokenNext(c, *user)
 		}
 	} else {
 		response.FailWithMessage("验证码错误", c)
@@ -43,7 +48,7 @@ func (b *BaseApi) Login(c *gin.Context) {
 }
 
 // 登录以后签发jwt
-func (b *BaseApi) tokenNext(c *gin.Context, user system.SysUser) {
+func (b *BaseApi) TokenNext(c *gin.Context, user system.SysUser) {
 	j := &utils.JWT{SigningKey: []byte(global.GVA_CONFIG.JWT.SigningKey)} // 唯一签名
 	claims := j.CreateClaims(systemReq.BaseClaims{
 		UUID:        user.UUID,
@@ -119,7 +124,7 @@ func (b *BaseApi) Register(c *gin.Context) {
 			AuthorityId: v,
 		})
 	}
-	user := &system.SysUser{Username: r.Username, NickName: r.NickName, Password: r.Password, HeaderImg: r.HeaderImg, AuthorityId: r.AuthorityId, Authorities: authorities}
+	user := &system.SysUser{Username: r.Username, NickName: r.NickName, Password: r.Password, HeaderImg: r.HeaderImg, AuthorityId: r.AuthorityId, Authorities: authorities, Enable: r.Enable}
 	userReturn, err := userService.Register(*user)
 	if err != nil {
 		global.GVA_LOG.Error("注册失败!", zap.Error(err))
@@ -284,6 +289,7 @@ func (b *BaseApi) SetUserInfo(c *gin.Context) {
 		if err != nil {
 			global.GVA_LOG.Error("设置失败!", zap.Error(err))
 			response.FailWithMessage("设置失败", c)
+			return
 		}
 	}
 
@@ -296,6 +302,7 @@ func (b *BaseApi) SetUserInfo(c *gin.Context) {
 		Phone:     user.Phone,
 		Email:     user.Email,
 		SideMode:  user.SideMode,
+		Enable:    user.Enable,
 	}); err != nil {
 		global.GVA_LOG.Error("设置失败!", zap.Error(err))
 		response.FailWithMessage("设置失败", c)
@@ -325,6 +332,7 @@ func (b *BaseApi) SetSelfInfo(c *gin.Context) {
 		Phone:     user.Phone,
 		Email:     user.Email,
 		SideMode:  user.SideMode,
+		Enable:    user.Enable,
 	}); err != nil {
 		global.GVA_LOG.Error("设置失败!", zap.Error(err))
 		response.FailWithMessage("设置失败", c)

@@ -15,11 +15,11 @@
     </template>
     <el-select v-model="metaData.icon" style="width:100%" clearable filterable class="gva-select" placeholder="请选择">
       <el-option
-          v-for="item in options"
-          :key="item.key"
-          class="select__option_item"
-          :label="item.key"
-          :value="item.key"
+        v-for="item in options"
+        :key="item.key"
+        class="select__option_item"
+        :label="item.key"
+        :value="item.key"
       >
       <template v-if="item.label.includes('gvaIcon-')">
         <el-icon class="gva-icon gvaIcon" :class="item.label">
@@ -28,7 +28,7 @@
       <template v-else>
         <span class="gva-icon" style=" padding: 3px 0 0; " :class="item.label">
           <el-icon>
-            <component :is="item.label"/>
+            <component :is="item.label" />
           </el-icon>
         </span>
       </template>
@@ -1195,10 +1195,8 @@ export default {
 
 <style lang="scss">
 .gva-icon {
-  //float: left;
   color: rgb(132, 146, 166);
-  font-size: 13px;
-  //line-height: 32px;
+  font-size: 14px;
   margin-right: 10px;
 }
 
