@@ -57,11 +57,18 @@ export default {
 
 <script setup>
 import { ElMessage, ElMessageBox } from 'element-plus'
+import { emitter } from '../../../utils/bus';
 
 const props = defineProps({
   rightMenu: {
     type: Object,
     default: null
+  },
+  data: {
+    default: function() {
+      return {}
+    },
+    type: Object
   }
 })
 

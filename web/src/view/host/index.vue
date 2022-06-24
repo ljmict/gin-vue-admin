@@ -13,7 +13,7 @@
             node-key="id"
             @node-contextmenu="handleRightClick"
           />
-          <RightMenu id="option-button-group" :rightMenu="rightMenu" />
+          <RightMenu id="option-button-group" :rightMenu="rightMenu" :data="data" />
         </el-card>
       </el-col>
       <el-col :span="18">
@@ -26,9 +26,10 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive, ref } from 'vue'
+import { reactive, ref, onMounted } from 'vue'
 import RightMenu from '@/view/host/rightMenu/rightMenu.vue'
 import TableCard from '@/view/host/tableCard/tableCard.vue'
+import { emitter } from '@/utils/bus';
 
 const rightMenu = reactive({
   optionCardX: 0, // 文件夹节点操作卡位置
@@ -57,63 +58,12 @@ const OptionCardClose = (event) => {
   }
 }
 
-const data = [
+const data = ref([
   {
-    label: '阿里云',
-    children: [
-      {
-        label: 'Level two 1-1',
-        children: [
-          {
-            label: 'Level three 1-1-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: '腾讯云',
-    children: [
-      {
-        label: 'Level two 2-1',
-        children: [
-          {
-            label: 'Level three 2-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 2-2',
-        children: [
-          {
-            label: 'Level three 2-2-1',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    label: '百度云',
-    children: [
-      {
-        label: 'Level two 3-1',
-        children: [
-          {
-            label: 'Level three 3-1-1',
-          },
-        ],
-      },
-      {
-        label: 'Level two 3-2',
-        children: [
-          {
-            label: 'Level three 3-2-1',
-          },
-        ],
-      },
-    ],
-  },
-]
+    label: '默认分组'
+  }
+])
+
 </script>
 
 <style>
